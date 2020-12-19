@@ -8,22 +8,40 @@ module.exports = function(app) {
   // ===============================================================================
 
   // API GET Requests
-  app.get("/api/notes", function(req, res) {
-    res.json(noteData);
+  app.get("/api/notes", (req, res) => {
+    fs.readFile("./db/db.json", (err, data) => {
+      if (err) throw err;
+      return res.json(JSON.parse(data));
+    });
   });
 
   // API POST Requests
-  app.post("/api/notes", function(req, res) {
-    noteData.push(req.body);
-    var inputtedData = JSON.stringify(noteData);
-    fs.writeFile('./db/db.json', inputtedData, 'utf8', err => err ? console.log(err) : console.log("DB Updated"));
-    res.json(req.body);
+  app.post("/api/notes", (req, res) => {
+    let inputtedData = req.body;
+
+    // Add a unique id to the note
+    let uid = genRandomNum(1,9999);
+    inputtedData["id"] = uid;
+
+    noteData.push(inputtedData);
+    fs.writeFile('./db/db.json', JSON.stringify(noteData), (err) => {
+      if (err) throw err;
+      return res.json(inputtedData);
+    });
   });
 
-  // Reset All Data **REMOVE BEFORE FINAL**
-  app.post("/api/reset", function(req, res) {
-    noteData.length = 0;
-    res.json({ ok: true });
+  app.delete("/api/notes/:id", (req, res) => {
+    let deletionTarget = req.params.id;
+    for (i = 0; i < noteData.length; i++) {
+      if (deletionTarget == noteData[i].id) {
+        noteData.splice(i, 1);
+      }
+    }
+    fs.writeFile("./db/db.json", JSON.stringify(noteData), (err) => {
+      if (err) throw err;
+      return;
+    });
+    res.end();
   });
 
   // ===============================================================================
@@ -39,3 +57,11 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 };
+
+// 
+// 
+//
+
+function genRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
