@@ -14,7 +14,7 @@ Download the repo, run `npm i` and then `node server.js`.
 
 ## Usage
 
-![Screenshot of the Note Taker app running](/assets/images/philly-magic-gardens.jpg "SMU Homework 11 - Note Taker")
+![Screenshot of the Note Taker app running](screenshot.png "SMU Homework 11 - Note Taker")
 
 ## Credits
 
