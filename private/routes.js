@@ -1,31 +1,12 @@
 var path = require("path");
 var noteData = require("./noteData");
 
-// ===============================================================================
-// HTML ROUTES
-// ===============================================================================
+
 
 module.exports = function(app) {
-  app.get("/notes", function(req, res) {
-    console.log(path.join(__dirname, "../public/notes.html"));
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-  });
-
-  app.get("/", function(req, res) {
-    console.log(path.join(__dirname, "../public/notes.html"));
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
-  // If no matching route is found default to home
-  app.get("*", function(req, res) {
-    console.log(path.join(__dirname, "../public/notes.html"));
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
-// ===============================================================================
-// API ROUTES
-// ===============================================================================
-
+  // ===============================================================================
+  // API ROUTES
+  // ===============================================================================
 
   // API GET Requests
   app.get("/api/notes", function(req, res) {
@@ -44,5 +25,18 @@ module.exports = function(app) {
   app.post("/api/reset", function(req, res) {
     noteData.length = 0;
     res.json({ ok: true });
+  });
+
+  // ===============================================================================
+  // HTML ROUTES
+  // ===============================================================================
+
+  app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
+  });
+
+  // If no matching route is found default to home
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 };
