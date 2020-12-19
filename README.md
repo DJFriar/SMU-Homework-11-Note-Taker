@@ -1,6 +1,12 @@
 # SMU-Homework-11-Note-Taker
 
-PUT PROJECT DESCRIPTION HERE
+Create an application that can be used to write, save, and delete notes. This application will use an express backend and save and retrieve note data from a JSON file.
+
+## Acceptance Criteria
+
+- [X] Application should allow users to create and save notes.
+- [X] Application should allow users to view previously saved notes.
+- [X] Application should allow users to delete previously saved notes.
 
 ## Installation
 
@@ -12,7 +18,7 @@ Download the repo, run `npm i` and then `node server.js`.
 
 [Note Taker app on Heroku](https://smu-homework-11-note-taker.herokuapp.com)
 
-## Usage
+## Screenshot
 
 ![Screenshot of the Note Taker app running](screenshot.png "SMU Homework 11 - Note Taker")
 
