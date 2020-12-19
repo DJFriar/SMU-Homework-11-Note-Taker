@@ -12,6 +12,8 @@ INSERT SCREENSHOTS HERE
 
 ## Credits
 
+- Musical Soundtrack: [Summer Music Mix 2020 #4 by Eric Clapman](https://www.youtube.com/watch?v=cwfEkoHPw-o)
+
 PUT CREDITS HERE
 
 ## License

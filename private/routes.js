@@ -1,7 +1,6 @@
 var path = require("path");
-var noteData = require("./noteData");
-
-
+var fs = require("fs");
+let noteData = require('../db/db.json');
 
 module.exports = function(app) {
   // ===============================================================================
@@ -15,10 +14,10 @@ module.exports = function(app) {
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-    if (noteData.length < 5) {
-      noteData.push(req.body);
-      res.json(true);
-    }
+    noteData.push(req.body);
+    var inputtedData = JSON.stringify(noteData);
+    fs.writeFile('./db/db.json', inputtedData, 'utf8', err => err ? console.log(err) : console.log("DB Updated"));
+    res.json(req.body);
   });
 
   // Reset All Data **REMOVE BEFORE FINAL**
